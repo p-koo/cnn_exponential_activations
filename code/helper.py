@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import os, sys
 import h5py
+import pandas as pd
 import numpy as np
 from deepomics import utils
 
@@ -87,8 +88,8 @@ def import_model(model_name):
         from models import cnn_2 as genome_model
     elif model_name == 'cnn_50':
         from models import cnn_50 as genome_model
-    elif model_name == 'distnet':
-        from models import distnet as genome_model
+    elif model_name == 'cnn_deep':
+        from models import cnn_deep as genome_model
     return genome_model
 
 
@@ -139,4 +140,51 @@ def meme_generate(W, output_file='meme.txt', prefix='filter', factor=None):
         f.write('\n')
 
     f.close()
+
+
+
+def match_hits_to_ground_truth(file_path, motifs, size=30):
+    
+    # get dataframe for tomtom results
+    df = pd.read_csv(file_path, delimiter='\t')
+
+    # loop through filters
+    best_qvalues = np.ones(size)
+    best_match = np.zeros(size)
+    for name in np.unique(df['Query_ID'].as_matrix()):
+
+        if name[:6] == 'filter':
+            filter_index = int(name.split('r')[1])
+
+            # get tomtom hits for filter
+            subdf = df.loc[df['Query_ID'] == name]
+            targets = subdf['Target_ID'].as_matrix()
+
+            # loop through ground truth motifs
+            for k, motif in enumerate(motifs): 
+
+                # loop through variations of ground truth motif
+                for motifid in motif: 
+
+                    # check if there is a match
+                    index = np.where((targets == motifid) ==  True)[0]
+                    if len(index) > 0:
+                        qvalue = subdf['q-value'].as_matrix()[index]
+
+                        # check to see if better motif hit, if so, update
+                        if best_qvalues[filter_index] > qvalue:
+                            best_qvalues[filter_index] = qvalue
+                            best_match[filter_index] = k 
+
+    # get the minimum q-value for each motif
+    min_qvalue = np.zeros(13)
+    for i in range(13):
+        index = np.where(best_match == i)[0]
+        if len(index) > 0:
+            min_qvalue[i] = np.min(best_qvalues[index])
+
+    match_index = np.where(best_qvalues != 1)[0]
+    match_fraction = len(match_index)/float(size)
+
+    return best_qvalues, best_match, min_qvalue, match_fraction 
 

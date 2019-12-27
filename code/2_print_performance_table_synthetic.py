@@ -11,7 +11,7 @@ from deepomics import utils, metrics
 
 #------------------------------------------------------------------------------------------------
 
-all_models = ['cnn_2', 'cnn_50', 'distnet']
+all_models = ['cnn_2', 'cnn_50', 'cnn_deep']
 activations = ['exp', 'relu']
 num_trials = 5
 

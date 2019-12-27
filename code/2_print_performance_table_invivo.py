@@ -11,9 +11,9 @@ from deepomics import utils, metrics
 
 #------------------------------------------------------------------------------------------------
 
-all_models = ['cnn_2', 'cnn_50', 'distnet']
+all_models = ['cnn_2', 'cnn_50', 'cnn_deep']
 activations = ['exp', 'relu']
-num_trials = 3
+num_trials = 5
 
 # save path
 results_path = utils.make_directory('../results', 'invivo')

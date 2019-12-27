@@ -12,7 +12,7 @@ from deepomics import utils, fit, visualize
 
 #------------------------------------------------------------------------------------------------
 
-all_models = ['cnn_2', 'distnet', 'cnn_50']
+all_models = ['cnn_2', 'cnn_deep', 'cnn_50']
 activations = [ 'relu', 'exp'] 
 
 num_trials = 5

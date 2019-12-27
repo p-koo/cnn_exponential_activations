@@ -1,6 +1,6 @@
 # Learning Sequence Motifs with Exponential Activations
 
-This is a repository that contains datasets and scripts to reproduce the results of "Improving Convolutional Network Interpretability with Exponential Activations" by Peter K. Koo and Matt Ploenzke, which was presented at the ICML Workshop for Computational Biology 2019 in Long Beach, CA. A preprint of the workshop paper can be found here: https://www.biorxiv.org/content/10.1101/650804v1
+This is a repository that contains datasets and scripts to reproduce the results of "Improving Convolutional Network Interpretability with Exponential Activations" by Peter K. Koo and Matt Ploenzke, which was presented at the ICML Workshop for Computational Biology 2019 in Long Beach, CA. A preprint of the workshop abstract can be found here: https://www.biorxiv.org/content/10.1101/650804v1
 
 
 The code here depends on Deepomics, a custom-written, high-level APIs written on top of Tensorflow to seamlessly build, train, test, and evaluate neural network models.  WARNING: Deepomics is a required sub-repository.  To properly clone this repository, please use: 
@@ -8,9 +8,9 @@ The code here depends on Deepomics, a custom-written, high-level APIs written on
 $ git clone --recursive \url{https://github.com/p-koo/cnn_exponential_activations.git}
 
 #### Dependencies
-* Tensorflow r1.0 or greater (preferably r1.4 or r1.5)
-* Python dependencies: PIL, matplotlib, numpy, scipy, sklearn
-
+* Tensorflow r1.0 or greater (preferably r1.14 or r1.15)
+* Python dependencies: PIL, matplotlib, numpy, scipy (version 1.1.0), sklearn
+* meme suite (5.1.0)
 
 ## Overview of the code
 
@@ -31,7 +31,8 @@ To evaluate the performance of each model on the test set:
 
 
 To perform the Tomtom search comparison tool :
-* code/3_tomtom_compare.sh  
+* code/3_tomtom_compare_synthetic.sh  
+* code/3_tomtom_compare_invivo.sh  
 
 Requires Tomtom installation as well as command-line abilities from the current directory.
 
