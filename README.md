@@ -36,6 +36,10 @@ To perform the Tomtom search comparison tool :
 
 Requires Tomtom installation as well as command-line abilities from the current directory.
 
+To calculate statistics across different initialization trials for each model, this script aggregates the matches to ground truth motifs:
+* code/4_match_statistics_synthetic.sh  
+* code/4_match_statistics_invivo.sh  
+
 
 ## Overview of data
 
